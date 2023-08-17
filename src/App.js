@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Layout from "./Layout/Layout";
+import Error404 from "./pages/404/404";
+import Overview from "./pages/Overview/Overview";
+
+import { Navigate, Route, Routes } from "react-router-dom";
+
+// import { app } from "./firebaseconfig";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Routes>
+        <Route exact path="/" element={<Overview />} />
+
+        <Route exact path="/404" element={<Error404 />} />
+
+        <Route path="*" element={<Navigate replace to="/404" />} />
+      </Routes>
+    </Layout>
   );
 }
 
