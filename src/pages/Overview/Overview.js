@@ -5,21 +5,19 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true,
 });
 
 const Overview = () => {
   const [result, setResult] = useState("");
 
   const generateImage = async () => {
-    const res = await openai.createImage({
-      prompt: "a cat sitting in a tree",
-      n: 1,
-      size: "512x512",
+    const image = await openai.images.generate({
+      prompt: "A cute baby sea otter",
     });
 
-    setResult(res.data.data[0].url);
+    setResult(image.data);
   };
-
   return (
     <div className="p-8">
       <button onClick={generateImage}>Generate Image</button>
